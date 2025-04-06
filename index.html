@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LOTG Quiz</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #e8f0ff, #ffffff);
+      color: #2c3e50;
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+
+
+    h1, h2, h3 {
+      color: #1c2d5a;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-left: 90px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    button {
+      background: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 10px 10px 10px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #0066cc;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #timer {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: right;
+      color: #e67e22;
+    }
+
+    .progress-container {
+      background: #dce3ea;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 16px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #004080;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .question-card {
+      background: #f4f8fb;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-left: 6px solid #004080;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #bbb;
+      font-size: 16px;
+    }
+
+    .section-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 90px;
+    }
+
+    .section-buttons button {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    #navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    /* RESULTS STYLES */
+    .result-summary {
+      background: #f5faff;
+      padding: 20px;
+      border-left: 6px solid #004080;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .question-review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .review-card {
+      background: #fdfdfd;
+      border-radius: 10px;
+      padding: 16px;
+      border-left: 5px solid #ccc;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+
+    .card-correct {
+      border-left-color: #2ecc71;
+    }
+
+    .card-incorrect {
+      border-left-color: #e74c3c;
+    }
+
+    .review-header {
+      font-size: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .result-icon {
+      font-size: 22px;
+    }
+
+    .review-card video {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    .lotg-quote {
+      background: #f2faff;
+      border-left: 4px solid #3498db;
+      padding: 10px 15px;
+      margin-top: 12px;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .toggle-btn {
+      margin-top: 10px;
+      background: transparent;
+      color: #004080;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-style: italic;
+      padding: 0;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    
+
+    <div id="landing-screen">
+      <h1>Welcome to the LOTG Quiz</h1>
+      <p style="margin-left: 90px;">Please select a quiz section to begin:</p>
+      <div class="section-buttons">
+        <button onclick="startSection('general')">🗓️ 06/04/25</button>
+        <button onclick="startSection('offside')">🗓️ 07/04/25</button>
+        <button onclick="startSection('restarts')">🗓️ 08/04/25</button>
+      </div>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+      <div id="timer">15:00</div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div id="question-container"></div>
+      <div id="navigation">
+        <button onclick="prevQuestion()">⬅ Back</button>
+        <button onclick="nextQuestion()">Next ➡</button>
+      </div>
+    </div>
+
+    <div id="result-screen" class="hidden">
+      <div id="score"></div>
+      <div id="review"></div>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script>
+    let currentSection = '';
+    let currentQuestion = 0;
+    let answers = [];
+    let timeLeft = 900;
+    let timer;
+    let manualScores = {};
+
+    function startSection(section) {
+      currentSection = section;
+      currentQuestion = 0;
+      answers = [];
+      manualScores = {};
+      document.getElementById("landing-screen").classList.add("hidden");
+      document.getElementById("quiz-screen").classList.remove("hidden");
+      timer = setInterval(updateTimer, 1000);
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = allQuestions[currentSection][currentQuestion];
+      const container = document.getElementById("question-container");
+      const totalQuestions = allQuestions[currentSection].length;
+
+      container.innerHTML = `<div class="question-card">
+        <h3>Question ${currentQuestion + 1} of ${totalQuestions}</h3>
+        ${q.video ? `<video controls><source src="${q.video}" type="video/mp4"></video>` : ""}
+        <p>${q.text}</p>`;
+
+      if (q.type === "text") {
+        const saved = answers[currentQuestion] || "";
+        container.innerHTML += `<input type="text" value="${saved}" oninput="saveTextAnswer(this.value)" />`;
+      } else {
+        for (let i = 0; i < q.options.length; i++) {
+          const checked = answers[currentQuestion] === i ? "checked" : "";
+          container.innerHTML += `<label><input type="radio" name="answer" value="${i}" ${checked} onchange="saveAnswer(${i})"> ${q.options[i]}</label>`;
+        }
+      }
+
+      container.innerHTML += `</div>`;
+      updateProgressBar(currentQuestion + 1, totalQuestions);
+    }
+
+    function updateProgressBar(current, total) {
+      const percent = (current / total) * 100;
+      document.getElementById("progress-bar").style.width = percent + "%";
+    }
+
+    function saveAnswer(index) {
+      answers[currentQuestion] = index;
+    }
+
+    function saveTextAnswer(text) {
+      answers[currentQuestion] = text;
+    }
+
+    function nextQuestion() {
+      if (answers[currentQuestion] == null || answers[currentQuestion] === "") {
+        alert("Please answer before continuing.");
+        return;
+      }
+      if (currentQuestion < allQuestions[currentSection].length - 1) {
+        currentQuestion++;
+        showQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+      }
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      let min = Math.floor(timeLeft / 60);
+      let sec = timeLeft % 60;
+      document.getElementById("timer").textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
+      if (timeLeft <= 0) finishQuiz();
+    }
+
+    function finishQuiz() {
+      clearInterval(timer);
+      document.getElementById("quiz-screen").classList.add("hidden");
+      document.getElementById("result-screen").classList.remove("hidden");
+
+      let questions = allQuestions[currentSection];
+      let total = questions.length;
+
+      let reviewHTML = `
+        <hr>
+        <h3>📘 Question Review</h3>
+        <div class="question-review-list">
+      `;
+
+
+      for (let i = 0; i < questions.length; i++) {
+        const q = questions[i];
+        const userAnswer = answers[i];
+        const correctAnswer = q.answer;
+        const isCorrect = q.type === "text" ? (manualScores[i] === 1) : userAnswer === correctAnswer;
+        const resultIcon = isCorrect ? '✅' : '❌';
+        const resultClass = isCorrect ? 'card-correct' : 'card-incorrect';
+        const answerDisplay = q.type === "text" ? userAnswer : (q.options[userAnswer] || "No answer");
+        const correctDisplay = q.type === "text" ? q.answer : q.options[q.answer];
+        const quoteId = `quote-${i}`;
+        const isLong = q.quote.length > 250;
+        const preview = q.quote.substring(0, 250);
+
+        reviewHTML += `
+          <div class="review-card ${resultClass}" data-index="${i}">
+
+            <div class="review-header">
+              <span class="result-icon">${resultIcon}</span>
+              <strong>Q${i + 1}:</strong> ${q.text}
+            </div>
+            ${q.video ? `<video controls><source src="${q.video}" type="video/mp4"></video>` : ""}
+            <p><strong>Your Answer:</strong> ${answerDisplay}</p>
+            <p><strong>Correct Answer:</strong> ${correctDisplay}</p>
+            <p><strong>Law Ref:</strong> ${q.law}</p>
+            <div class="lotg-quote">
+              <strong>LOTG Quote:</strong><br>
+              <span id="${quoteId}" class="quote-text">${isLong ? preview + '...' : q.quote}</span>
+              ${isLong ? `<br><button class="toggle-btn" data-id="${quoteId}" data-fullquote="${q.quote.replace(/"/g, '&quot;')}">Show More</button>` : ""}
+            </div>
+            ${q.type === "text" ? `<p><em>Manual Review Required:</em>
+              <button onclick="markManual(${i}, true)">Mark Correct</button>
+              <button onclick="markManual(${i}, false)">Mark Incorrect</button></p>` : ""}
+          </div>
+        `;
+      }
+
+      reviewHTML += `</div>`;
+      document.getElementById("review").innerHTML = reviewHTML;
+      updateManualScoreDisplay();
+    }
+
+    function getScore(questions) {
+      let score = 0;
+      for (let i = 0; i < questions.length; i++) {
+        if (questions[i].type === "text") {
+          score += manualScores[i] || 0;
+        } else if (answers[i] === questions[i].answer) {
+          score++;
+        }
+      }
+      return score;
+    }
+
+    function markManual(index, correct) {
+      const card = document.querySelector(`.review-card[data-index='${index}']`);
+      if (card) {
+        card.classList.remove("card-correct", "card-incorrect");
+        card.classList.add(correct ? "card-correct" : "card-incorrect");
+        manualScores[index] = correct ? 1 : 0;
+        updateManualScoreDisplay();
+      }
+    }
+
+
+
+    function updateManualScoreDisplay() {
+      const questions = allQuestions[currentSection];
+      const total = questions.length;
+      const score = getScore(questions);
+      const correct = score;
+      const incorrect = total - score;
+
+      // Update the score summary block
+      document.getElementById("score").innerHTML = `
+        <div class="result-summary">
+          <h2>📊 Your Results</h2>
+          <p><strong>Score:</strong> ${score} / ${total}</p>
+          <p><strong>Correct:</strong> ${correct}</p>
+          <p><strong>Incorrect:</strong> ${incorrect}</p>
+        </div>
+      `;
+    }
+  document.addEventListener("click", function (e) {
+  if (e.target && e.target.classList.contains("toggle-btn")) {
+    const button = e.target;
+    const id = button.getAttribute("data-id");
+    const fullQuote = button.getAttribute("data-fullquote");
+    const quoteEl = document.getElementById(id);
+    const isExpanded = button.innerText === "Show Less";
+
+    if (isExpanded) {
+      quoteEl.innerText = fullQuote.substring(0, 250) + '...';
+      button.innerText = "Show More";
+    } else {
+      quoteEl.innerText = fullQuote;
+      button.innerText = "Show Less";
+    }
+  }
+});
+
+  </script>
+</body>
+</html>
