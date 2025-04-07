@@ -26,8 +26,6 @@
       position: relative;
     }
 
-
-
     h1, h2, h3 {
       color: #1c2d5a;
     }
@@ -125,7 +123,6 @@
       margin-top: 20px;
     }
 
-    /* RESULTS STYLES */
     .result-summary {
       background: #f5faff;
       padding: 20px;
@@ -194,87 +191,43 @@
       padding: 0;
       text-decoration: underline;
     }
-   @media (max-width: 768px) {
-      body {
-        font-size: 16px;
-        padding: 10px;
-      }
 
-      #app {
-        margin: 10px;
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 24px;
-        margin-left: 0;
-        text-align: center;
-      }
-
-      p {
-        font-size: 16px;
-      }
-
-      .section-buttons {
-        flex-direction: column;
-        align-items: center;
-        margin-left: 0;
-      }
-
-      .section-buttons button {
-        min-width: auto;
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
-      #timer {
-        font-size: 18px;
-        text-align: center;
-      }
-
-      #navigation {
-        flex-direction: row;  /* Ensure buttons are side-by-side */
-        gap: 10px;
-      }
-
-      #navigation button {
-        flex: 1; /* Let them share the row space */
-      }
-
-
-      button {
-        width: 100%;
-        padding: 14px;
-        font-size: 16px;
-      }
-
-      .question-card,
-      .review-card,
-      .result-summary {
-        padding: 15px;
-        font-size: 15px;
-      }
-
-      input[type="text"] {
-        font-size: 15px;
-      }
-
-      .review-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .lotg-quote {
-        font-size: 14px;
-      }
+    body.mobile {
+      font-size: 16px;
+      padding: 10px;
     }
 
+    body.mobile #app {
+      margin: 10px;
+      padding: 20px;
+    }
+
+    body.mobile h1 {
+      font-size: 24px;
+      margin-left: 0;
+      text-align: center;
+    }
+
+    body.mobile .section-buttons {
+      flex-direction: column;
+      align-items: center;
+      margin-left: 0;
+    }
+
+    body.mobile .section-buttons button,
+    body.mobile #navigation button {
+      width: 100%;
+      font-size: 16px;
+    }
+
+    body.mobile #navigation {
+      flex-direction: row;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
   <div id="app">
-    
-
     <div id="landing-screen">
       <h1>Welcome to the LOTG Quiz</h1>
       <p style="margin-left: 90px;">Please select a quiz section to begin:</p>
@@ -303,6 +256,16 @@
     </div>
   </div>
 
+  <script>
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    if (isMobileDevice()) {
+      document.body.classList.add('mobile');
+    } else {
+      document.body.classList.add('desktop');
+    }
+  </script>
   <script src="questions.js"></script>
   <script>
     let currentSection = '';
@@ -395,13 +358,11 @@
 
       let questions = allQuestions[currentSection];
       let total = questions.length;
-
       let reviewHTML = `
         <hr>
-        <h3>📘 Question Review</h3>
+        <h3>\ud83d\udcd8 Question Review</h3>
         <div class="question-review-list">
       `;
-
 
       for (let i = 0; i < questions.length; i++) {
         const q = questions[i];
@@ -418,7 +379,6 @@
 
         reviewHTML += `
           <div class="review-card ${resultClass}" data-index="${i}">
-
             <div class="review-header">
               <span class="result-icon">${resultIcon}</span>
               <strong>Q${i + 1}:</strong> ${q.text}
@@ -466,43 +426,37 @@
       }
     }
 
-
-
     function updateManualScoreDisplay() {
       const questions = allQuestions[currentSection];
       const total = questions.length;
       const score = getScore(questions);
-      const correct = score;
-      const incorrect = total - score;
-
-      // Update the score summary block
       document.getElementById("score").innerHTML = `
         <div class="result-summary">
-          <h2>📊 Your Results</h2>
+          <h2>\ud83d\udcca Your Results</h2>
           <p><strong>Score:</strong> ${score} / ${total}</p>
-          <p><strong>Correct:</strong> ${correct}</p>
-          <p><strong>Incorrect:</strong> ${incorrect}</p>
+          <p><strong>Correct:</strong> ${score}</p>
+          <p><strong>Incorrect:</strong> ${total - score}</p>
         </div>
       `;
     }
-  document.addEventListener("click", function (e) {
-  if (e.target && e.target.classList.contains("toggle-btn")) {
-    const button = e.target;
-    const id = button.getAttribute("data-id");
-    const fullQuote = button.getAttribute("data-fullquote");
-    const quoteEl = document.getElementById(id);
-    const isExpanded = button.innerText === "Show Less";
 
-    if (isExpanded) {
-      quoteEl.innerText = fullQuote.substring(0, 250) + '...';
-      button.innerText = "Show More";
-    } else {
-      quoteEl.innerText = fullQuote;
-      button.innerText = "Show Less";
-    }
-  }
-});
+    document.addEventListener("click", function (e) {
+      if (e.target && e.target.classList.contains("toggle-btn")) {
+        const button = e.target;
+        const id = button.getAttribute("data-id");
+        const fullQuote = button.getAttribute("data-fullquote");
+        const quoteEl = document.getElementById(id);
+        const isExpanded = button.innerText === "Show Less";
 
+        if (isExpanded) {
+          quoteEl.innerText = fullQuote.substring(0, 250) + '...';
+          button.innerText = "Show More";
+        } else {
+          quoteEl.innerText = fullQuote;
+          button.innerText = "Show Less";
+        }
+      }
+    });
   </script>
 </body>
 </html>
