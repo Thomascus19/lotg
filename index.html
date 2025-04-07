@@ -194,6 +194,81 @@
       padding: 0;
       text-decoration: underline;
     }
+   @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      #app {
+        margin: 10px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-left: 0;
+        text-align: center;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .section-buttons {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+      }
+
+      .section-buttons button {
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      #timer {
+        font-size: 18px;
+        text-align: center;
+      }
+
+      #navigation {
+        flex-direction: row;  /* Ensure buttons are side-by-side */
+        gap: 10px;
+      }
+
+      #navigation button {
+        flex: 1; /* Let them share the row space */
+      }
+
+
+      button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+      }
+
+      .question-card,
+      .review-card,
+      .result-summary {
+        padding: 15px;
+        font-size: 15px;
+      }
+
+      input[type="text"] {
+        font-size: 15px;
+      }
+
+      .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lotg-quote {
+        font-size: 14px;
+      }
+    }
+
   </style>
 </head>
 <body>

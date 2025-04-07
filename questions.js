@@ -119,21 +119,85 @@ const allQuestions = {
 
   offside: [
     {
-      type: "multiple",
-      text: "this section is still being developed, please refresh the page and click general quiz.",
-      options: ["Allow the goal", "Offside offence – disallow goal", "Award penalty kick", "Indirect free kick"],
-      answer: 1,
-      law: "Law 11/2. Offside offence",
-      quote: "A player in an offside position is penalised if they gain an advantage by playing the ball after it has deflected off an opponent."
+      type: "text",
+      text: "Can you name the 8 cautionable offences?",
+      answer: "Cautionable offences- A player is cautioned if guilty of: \n<br><br> • delaying the restart of play \n<br> • dissent by word or action \n<br> • entering, re-entering or deliberately leaving the field of play without the referee’s permission \n<br> • failing to respect the required distance when play is restarted with a dropped ball, corner kick, free kick or throw-in \n<br> • persistent offences (no specific number or pattern of offences constitutes ‘persistent’) \n<br> • unsporting behaviour \n<br> • entering the referee review area (RRA) \n<br> • excessively using the ‘review’ (TV screen) signal",
+      law: "Law 12.3",
+      quote: "Cautionable offences- A player is cautioned if guilty of: \n delaying the restart of play \n dissent by word or action \n entering, re-entering or deliberately leaving the field of play without the referee’s permission \n failing to respect the required distance when play is restarted with a dropped ball, corner kick, free kick or throw-in \n persistent offences (no specific number or pattern of offences constitutes ‘persistent’) \n unsporting behaviour \n entering the referee review area (RRA) \n excessively using the ‘review’ (TV screen) signal"
     },
     {
       type: "text",
-      text: "Name one situation where a player is NOT penalised for being in an offside position.",
-      answer: "Receiving the ball directly from a throw-in",
-      law: "Law 11/3. No Offence",
-      quote: "There is no offside offence if a player receives the ball directly from a goal kick, corner kick, or throw-in."
-    }
+      text: "Can you name the 9 dismissal offences?",
+      answer: "A player, substitute or substituted player who commits any of the following offences is sent off: \n<br><br> • denying the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (except a goalkeeper within their penalty area) \n<br> • denying the opposing team a goal or an obvious goal-scoring opportunity by committing a non-deliberate handball offence outside their own penalty area \n<br> • denying a goal or an obvious goal-scoring opportunity to an opponent whose overall movement is towards the offender’s goal by an offence punishable by a free kick (unless as outlined below) \n<br> • serious foul play \n<br> • biting or spitting at someone \n<br> • violent conduct \n<br> • using offensive, insulting or abusive language and/or action(s) \n<br> • receiving a second caution in the same match \n<br> • entering the video operation room (VOR)",
+      law: "Law 12.3",
+      quote: "A player, substitute or substituted player who commits any of the following offences is sent off: \n denying the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (except a goalkeeper within their penalty area) \n denying the opposing team a goal or an obvious goal-scoring opportunity by committing a non-deliberate handball offence outside their own penalty area \n denying a goal or an obvious goal-scoring opportunity to an opponent whose overall movement is towards the offender’s goal by an offence punishable by a free kick (unless as outlined below) \n serious foul play \n biting or spitting at someone \n violent conduct \n using offensive, insulting or abusive language and/or action(s) \n receiving a second caution in the same match \n entering the video operation room (VOR)"
+    },
+    {
+      type: "multiple",
+      text: "The ball becomes defective at the taking of a free kick. What should the referee do?",
+      options: ["Restart the game with a dropped ball at the point of the final touch","Restart the game with the freekick","Allow play to continue until the ball goes out of play"],
+      answer: 1,
+      law: "Law 2",
+      quote: "If the ball becomes defective at a kick-off, goal kick, corner kick, free kick, penalty kick or throw-in, the restart is re-taken. If the ball becomes defective during a penalty kick or penalties (penalty shoot-out) as it moves forward and before it touches a player, crossbar or goalposts the penalty kick is retaken."
+    },
+    {
+      type: "multiple",
+      text: "At a dropped ball, which of the following statements is true?",
+      options: ["All other players must be 4m away from the ball until it is in play","All opposition players must be 4m away from the ball","Two players from the same team can be within 4m of the ball"],
+      answer: 0,
+      law: "Law 8.2",
+      quote: "All other players (of both teams) must remain at least 4 m (4.5 yds) from the ball until it is in play"
+    },
+    {
+      type: "multiple",
+      text: "A defending player intentionally handles the ball in an attempt to deny a clear and obvious goal. The attempt is unsuccessful and the ball still goes in. What should you do?",
+      options: ["Award a penalty kick and send off the defender","Award a goal and send off the defender","Award a goal and caution the defender","Award a goal and take no diciplinary action"],
+      answer: 2,
+      law: "Law 12.3",
+      quote: "If the referee plays the advantage for an offence for which a caution/sending-off would have been issued had play been stopped, this caution/sending-off must be issued when the ball is next out of play. However, if the offence was denying the opposing team an obvious goal-scoring opportunity the player is cautioned for unsporting behaviour; if the offence was interfering with or stopping a promising attack, the player is not cautioned."
+    },
+    {
+      type: "multiple",
+      text: "A player who is off the field of play receiving treatment re-enters the field of play without permission and commits a careless tackle on an opponent. What is the correct outcome?",
+      options: ["Award an indirect free kick and take no diciplinary action","Award an indirect free kick and caution the player","Award a dropped ball and take no diciplinary action","Award a direct free kick and caution the player", "Award a direct free kick and dismiss the player"],
+      answer: 3,
+      law: "Law 3.8, 12.3",
+      quote: "A player is cautioned if guilty of: \n entering, re-entering or deliberately leaving the field of play without the referee’s permission. Explanation: As the player had not commited a second cautionable offence, they would not be sent off. \n \n Restart - Law 3.8 \n If a player who requires the referee’s permission to re-enter the field of play re-enters without the referee’s permission, the referee must: \n stop play (not immediately if the player does not interfere with play or a match official or if the advantage can be applied \n caution the player for entering the field of play without permission \n If the referee stops play, it must be restarted: \n with a direct free kick from the position of the interference \n with an indirect free kick from the position of the ball when play was stopped if there was no interference"
+    },
+    {
+      type: "mutliple",
+      text: "A player who is off the field of play receiving treatment re-enters the field of play without permission and commits a reckless tackle on an opponent. What is the correct outcome? ",
+      options: ["Award an indirect free kick, caution the player twice and dissmiss them","Award a direct free kick, caution the player twice and dismiss them","Award an indirect free kick and take no diciplinary action", "Award a dropped ball and take no diciplinary action","Award a dropped ball, caution the player twice and dismiss them"],
+      answer: 1,
+      law: "12.3, 3.8",
+      quote: "Where two separate cautionable offences are committed (even in close proximity), they should result in two cautions, for example if a player enters the field of play without the required permission and commits a reckless tackle or stops a promising attack with a foul/handball \n Law 3.8 - If a player who requires the referee’s permission to re-enter the field of play re-enters without the referee’s permission, the referee must: \n stop play (not immediately if the player does not interfere with play or a match official or if the advantage can be applied \n caution the player for entering the field of play without permission \n If the referee stops play, it must be restarted: \n with a direct free kick from the position of the interference \n with an indirect free kick from the position of the ball when play was stopped if there was no interference"
+    },
+    {
+      type: "multiple",
+      text: "At a dropped ball you drop the ball to a home team player, who dribbles 20 yards before shooting and scoring directly in the opposition goal. What do you do?",
+      options: ["Award the goal", "Award a corner", "Award a goal kick", "Retake the dropped ball"],
+      answer: 2,
+      law: "8.2",
+      quote: "If a dropped ball enters the goal without touching at least two players, play is restarted with: \n a goal kick if it enters the opponents’ goal \n a corner kick if it enters the team’s goal"
+    },
+    {
+      type: "multiple",
+      text: "Play is restarted with a dropped ball for team A and the player kicks the ball before it hits the ground. What should the referee do?",
+      options: ["Allow play to continue", "Award an indirect free kick to team B", "Award a direct free kick to team B", "Retake the dropped ball"],
+      answer: 3,
+      law: "8.2",
+      quote: "The ball is dropped again if it: \n touches a player before it touches the ground"
+    },
+    {
+      type: "multiple",
+      text: "A player accidentally loses his footware and then scores a goal before the ball goes out of play. Should the goal stand?",
+      options: ["Yes", "No"],
+      answer: 0,
+      law: "4.2",
+      quote: "A player whose footwear or shinguard is lost accidentally must replace it as soon as possible and no later than when the ball next goes out of play; if before doing so the player plays the ball and/or scores a goal, the goal is awarded."
+    },
   ],
+
 
   restarts: [
     {
