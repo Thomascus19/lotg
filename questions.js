@@ -202,27 +202,123 @@ const allQuestions = {
   restarts: [
     {
       type: "multiple",
-      text: "This section is still being developed, please refresh the page and click general.",
-      options: ["Allow play to continue", "Dropped ball for defending GK", "Indirect free kick", "Dropped ball for attacker"],
+      text: "During open play, the referee accidentally blows the whistle. How is play restarted?",
+      options: ["Allow play to continue", "Dropped ball", "Indirect free kick to the team who touched it last", "Direct free kick to the team who touched it last"],
       answer: 1,
       law: "Law 8/2. Dropped ball procedure",
-      quote: "The ball is dropped for the defending team goalkeeper in their penalty area if, when play was stopped, the ball was in or last touched in the penalty area."
+      quote: "A kick-off starts both halves of a match, both halves of extra time and restarts play after a goal has been scored. Free kicks (direct or indirect), penalty kicks, throw-ins, goal kicks and corner kicks are other restarts (see Laws 13–17). A dropped ball is the restart when the referee stops play and the Law does not require one of the above restarts. If an offence occurs when the ball is not in play, this does not change how play is restarted."
     },
     {
-      type: "text",
+      type: "multiple",
       text: "What is the minimum distance opponents must retreat at a free kick?",
-      answer: "9.15 metres",
+      options: ["9.15 metres","11 yards", "7.5 metres"],
+      answer: 0,
       law: "Law 13 – Free kicks",
       quote: "Opponents must remain at least 9.15 m (10 yds) from the ball until it is in play."
     },
     {
       type: "multiple",
-      video: "https://www.example.com/video2.mp4",
-      text: "Watch the clip. What is the correct restart after the ball hits the referee and changes possession?",
-      options: ["Allow play to continue", "Dropped ball for last team in control", "Indirect free kick", "Retake the previous restart"],
+      video: "videos/clip1.mp4",
+      text: "Watch the clip. What is the correct decision?",
+      options: ["Allow play to continue", "Award an indirect free kick to the attacking team and caution the goalkeeper for stopping a promising attack", "Award an indirect free kick to the attacking team and dismiss the goalkeeper for denying a goalscoring opportunity", "Award an indirect free kick and take no diciplinary action"],
+      answer: 3,
+      law: "12.1",
+      quote: "If the goalkeeper handles the ball inside their penalty area when not permitted to do so, an indirect free kick is awarded but there is no disciplinary sanction. However, if the offence is playing the ball a second time (with or without the hand/arm) after a restart before it touches another player, the goalkeeper must be sanctioned if the offence stops a promising attack or denies an opponent or the opposing team a goal or an obvious goal-scoring opportunity."
+    },
+    {
+      type: "multiple",
+      text: "At the taking of a quick free kick, a defender who was less than the required distance intercepts the ball. What is the referee's decision?",
+      options: ["Allow play to continue","Award an indirect free kick and caution the player", "Award a direct free kick and caution the player", "Award an indirect free kick and take no diciplinary action"],
+      answer: 0,
+      law: "Law 13.3 – Free kicks",
+      quote: "If a player takes a free kick quickly and an opponent who is less than 9.15 m (10 yds) from the ball intercepts it, the referee allows play to continue."
+    },
+    {
+      type: "text",
+      text: "An attacking player is fouled outside the penalty area but falls into the penalty area. How is play restarted?",
+      answer: "Offences are penalised at the point on the field where the offence occurred so a foul outside the penalty area is a free kick offence even if the player falls into the penalty area.",
+      law: "Law 13.3 – Free kicks",
+      quote: "Offences are penalised at the point on the field where the offence occurred so a foul outside the penalty area is a free kick offence even if the player falls into the penalty area."
+    },
+    {
+      type: "multiple",
+      text: "A dog enters the field of play during the match and prevents a goal being scored by stopping the ball on the goal line. The dog's interference does not prevent any defending player from playing the ball. What is the referee's decision?",
+      options: ["Award the goal","Award a dropped ball to the goalkeeper", "Award a dropped ball to the attacking team", "Award a penalty kick"],
       answer: 1,
-      law: "Law 8/1. Ball hits match official",
-      quote: "If the ball touches a match official and a team starts a promising attack or possession changes, a dropped ball is awarded."
-    }
+      law: "3.7",
+      quote: ""
+    },
+    {
+      type: "multiple",
+      text: "A defender takes a direct free kick and passes the ball back to a goalkeeper. The goalkeeper fails to kick the ball and does not touch it. After that, the ball enters the goal. What is the correct decision?",
+      options: ["Award the goal","Award a corner", "Award a goal kick", "Retake the free kick"],
+      answer: 1,
+      law: "Law 13 – Free kicks",
+      quote: "If a free kick is kicked directly into the team's own goal, the referee awards a corner kick to the opposing team."
+    },
+    {
+      type: "multiple",
+      text: "During open play, an attacker strikes a shot on goal, which deflects off a balloon, preventing the goalkeeper making a save, and goes into the goal. What should the referee do?",
+      options: ["Award the goal","Award a dropped ball where the offence took place"],
+      answer: 1,
+      law: "Law 5.3 – The Referee",
+      quote: "stops, suspends or abandons the match for any offences or because of outside interference. e.g: \n an extra ball, other object or animal enters the field of play during the match, the referee must: \n stop play (and restart with a dropped ball) only if it interferes with play - unless the ball is going into the goal and the interference does not prevent a defending player playing the ball, the goal is awarded if the ball enters the goal (even if contact was made with the ball) unless the interference was by the attacking team"
+    },
+    {
+      type: "text",
+      text: "Name the 8 reasons time should be added to each half",
+      answer: "Allowance is made by the referee in each half for all playing time lost in that half through: \n<br> substitutions \n<br> assessment and/or removal of injured players \n<br> wasting time \n<br> disciplinary sanctions \n<br> medical stoppages permitted by competition rules e.g. ‘drinks’ breaks (which should not exceed one minute) and ‘cooling’ breaks (ninety seconds to three minutes) \n<br> delays relating to VAR 'checks' and 'reviews' \n<br> goal celebrations \n<br> any other cause, including any significant delay to a restart (e.g. due to interference by an outside agent) \n<br> The fourth official indicates the minimum additional time decided by the referee at the end of the final minute of each half. The additional time may be increased by the referee but not reduced. \n<br> The referee must not compensate for a timekeeping error during the first half by changing the length of the second half.",
+      law: "Law 7",
+      quote: "Allowance is made by the referee in each half for all playing time lost in that half through: \n substitutions \n assessment and/or removal of injured players \n wasting time \n disciplinary sanctions \n medical stoppages permitted by competition rules e.g. ‘drinks’ breaks (which should not exceed one minute) and ‘cooling’ breaks (ninety seconds to three minutes) \n delays relating to VAR 'checks' and 'reviews' \n goal celebrations \n any other cause, including any significant delay to a restart (e.g. due to interference by an outside agent) \n The fourth official indicates the minimum additional time decided by the referee at the end of the final minute of each half. The additional time may be increased by the referee but not reduced. \n The referee must not compensate for a timekeeping error during the first half by changing the length of the second half."
+    },
+    {
+      type: "multiple",
+      text: "What is the maximum length of a drinks break",
+      options: ["30 seconds","60 seconds", "90 seconds", "120 seconds"],
+      answer: 1,
+      law: "Law 7",
+      quote: "‘drinks’ breaks (which should not exceed one minute)"
+    },
+    {
+      type: "multiple",
+      text: "The referee accidentally blows for half time 5 minutes early. What should he do?",
+      options: ["Play 45 minutues in the second half, + 5 minutes added to conpensate lost time","Play 45 minutes and do not conpensate any time", "Play 50 minutes second half + any stoppages", "Play 40 minutes second half to make it equal"],
+      answer: 1,
+      law: "Law 7",
+      quote: "The referee must not compensate for a timekeeping error during the first half by changing the length of the second half."
+    },
+    {
+      type: "text",
+      text: "In which three situations should you stop the game if the ball hits the referee",
+      answer: "it touches a match official, remains on the field of play and: \n<br> a team starts a promising attack or \n<br> the ball goes directly into the goal or \n<br> the team in possession of the ball changes",
+      law: "Law 9",
+      quote: "it touches a match official, remains on the field of play and: \n a team starts a promising attack or \n the ball goes directly into the goal or \n the team in possession of the ball changes"
+    },
+    {
+      type: "text",
+      text: "A subtitute was a few metres on the field of play when the goal was scored by their team but did not interfere with play. After that, before play restarts, the referee realises that the extra person was on the field. What is the correct decision? What is the correct diciplinary sanciton? What is the correct restart?",
+      answer: "The law does not expect the referee to penalise encroachment onto the field of play if it does not impact the play. The goal is allowed and the team that conceded the goal restarts play with a kick off. There is no diciplinary sanction.",
+      law: "Law 9",
+      quote: "it touches a match official, remains on the field of play and: \n a team starts a promising attack or \n the ball goes directly into the goal or \n the team in possession of the ball changes"
+    },
+    {
+      type: "text",
+      text: "An attacker does not control a pass from a team-mate, accidentally falls to the ground and the ball goes out for a goal kick. The attacker gets up as quickly and runs away as quickly as possible. The goalkeeper kicks the ball when the attacker is still inside the penalty area with their backs towards the goal. After that, the attacker intercepts the ball and scores a goal. What is the correct decision, diciplinary action and restart?",
+      answer: "The goal is awarded. There is no offence as the attacker did not have enough time to leave the penalty area and was allowed to touch the ball once it was in play. There is no diciplinary action and play is restarted with a kick off.",
+      law: "Law 16.2",
+      quote: "If, when a goal kick is taken, any opponents are inside the penalty area because they did not have time to leave, the referee allows play to continue. If an opponent who is in the penalty area when the goal kick is taken, or enters the penalty area before the ball is in play, touches or challenges for the ball before it is in play, the goal kick is retaken."
+    },
+    {
+      type: "text",
+      text: "A team has fewer than 7 players because one player has deliberately left the field of play. May the match continue?",
+      answer: "The referee is not obligied to stop play and the advantage may be applied, but the match must not resume after the ball has gone out of play.",
+      law: "Law 3.1",
+      quote: "Above"
+    },
+    
+
+    
+    
+    
   ]
 };
